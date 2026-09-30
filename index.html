@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -46,7 +47,8 @@
         }
 
         button,
-        .whatsapp {
+        .whatsapp,
+        .ubicacion {
             border: none;
             border-radius: 30px;
             padding: 15px 25px;
@@ -60,11 +62,12 @@
         }
 
         button:active,
-        .whatsapp:active {
+        .whatsapp:active,
+        .ubicacion:active {
             transform: scale(0.95);
         }
 
-        .musica {
+        .ubicacion {
             background: rgba(255, 255, 255, 0.92);
             color: #333;
         }
@@ -72,12 +75,6 @@
         .whatsapp {
             background: #25D366;
             color: white;
-        }
-
-        .mensaje {
-            margin-top: 12px;
-            font-size: 13px;
-            text-shadow: 0 1px 4px black;
         }
     </style>
 </head>
@@ -88,10 +85,13 @@
 
         <div class="botones">
 
-            <!-- BOTÓN DE MÚSICA -->
-            <button class="musica" id="botonMusica" onclick="reproducirMusica()">
-                🎵 Escuchar música
-            </button>
+            <!-- BOTÓN DE UBICACIÓN -->
+            <a
+                class="ubicacion"
+                href="https://maps.app.goo.gl/tFyQPV3e8qgu5CUC8"
+                target="_blank">
+                📍 Ver ubicación
+            </a>
 
             <!-- BOTÓN DE WHATSAPP -->
             <a
@@ -103,41 +103,37 @@
 
         </div>
 
-        <p class="mensaje">
-            Toca el botón para escuchar la música 🎶
-        </p>
-
     </div>
 
-    <!-- AUDIO -->
-    <audio id="musica" loop>
+    <!-- MÚSICA OCULTA -->
+    <audio id="musica" autoplay loop>
         <source src="musica.mp3" type="audio/mpeg">
         Tu navegador no soporta audio.
     </audio>
 
     <script>
 
-        function reproducirMusica() {
+        const audio = document.getElementById("musica");
 
-            const audio = document.getElementById("musica");
-            const boton = document.getElementById("botonMusica");
+        // Intentar reproducir automáticamente
+        window.addEventListener("load", function() {
+            audio.play().catch(function() {
+                console.log("El navegador bloqueó la reproducción automática.");
+            });
+        });
 
-            if (audio.paused) {
+        // Si el navegador bloquea el autoplay,
+        // la música comenzará con el primer toque.
+        document.addEventListener("click", function iniciarMusica() {
+            audio.play().catch(function() {});
+        }, { once: true });
 
-                audio.play();
-
-                boton.innerHTML = "⏸️ Pausar música";
-
-            } else {
-
-                audio.pause();
-
-                boton.innerHTML = "🎵 Escuchar música";
-
-            }
-        }
+        document.addEventListener("touchstart", function iniciarMusica() {
+            audio.play().catch(function() {});
+        }, { once: true });
 
     </script>
 
 </body>
 </html>
+```
