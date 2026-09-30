@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mis 15 Años</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .invitacion {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+
+            background-image: url("invitacion.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            padding: 30px 20px 50px;
+        }
+
+        .botones {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        button,
+        .whatsapp {
+            border: none;
+            border-radius: 30px;
+            padding: 15px 25px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+
+        button:active,
+        .whatsapp:active {
+            transform: scale(0.95);
+        }
+
+        .musica {
+            background: rgba(255, 255, 255, 0.92);
+            color: #333;
+        }
+
+        .whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .mensaje {
+            margin-top: 12px;
+            font-size: 13px;
+            text-shadow: 0 1px 4px black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="invitacion">
+
+        <div class="botones">
+
+            <!-- BOTÓN DE MÚSICA -->
+            <button class="musica" id="botonMusica" onclick="reproducirMusica()">
+                🎵 Escuchar música
+            </button>
+
+            <!-- BOTÓN DE WHATSAPP -->
+            <a
+                class="whatsapp"
+                href="https://wa.me/59173681321"
+                target="_blank">
+                💌 Confirmar asistencia
+            </a>
+
+        </div>
+
+        <p class="mensaje">
+            Toca el botón para escuchar la música 🎶
+        </p>
+
+    </div>
+
+    <!-- AUDIO -->
+    <audio id="musica" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio.
+    </audio>
+
+    <script>
+
+        function reproducirMusica() {
+
+            const audio = document.getElementById("musica");
+            const boton = document.getElementById("botonMusica");
+
+            if (audio.paused) {
+
+                audio.play();
+
+                boton.innerHTML = "⏸️ Pausar música";
+
+            } else {
+
+                audio.pause();
+
+                boton.innerHTML = "🎵 Escuchar música";
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
